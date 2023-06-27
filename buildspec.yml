@@ -1,0 +1,23 @@
+version: 0.2
+ 
+env:
+  variables:
+    PROJECT_NAME: "CodeBuild-Synopsys-Detect"
+  parameter-store:
+    BLACKDUCK_URL: "detect-BD-URL"
+    BLACKDUCK_TOKEN: "detect-BD-Token"
+ 
+phases:
+  install:
+    commands:
+      - curl -LOk https://detect.synopsys.com/detect.sh
+      - chmod +x ./detect.sh
+  build:
+    commands:
+      - mvn clean package
+  post_build:
+    commands:
+      - bash detect.sh --blackduck.url=$BLACKDUCK_URL --blackduck.api.token=$BLACKDUCK_TOKEN --blackduck.trust.cert=true --detect.project.name=$PROJECT_NAME --detect.project.version.name=$CODEBUILD_BUILD_ID
+  
+artifacts:
+  discard-paths: yes
