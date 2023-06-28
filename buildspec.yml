@@ -10,14 +10,14 @@ env:
 phases:
   install:
     commands:
-      - curl -LOk https://detect.synopsys.com/detect.sh
-      - chmod +x ./detect.sh
+      - curl -LOk https://detect.synopsys.com/detect8.sh
+      - chmod +x ./detect8.sh
   build:
     commands:
       - mvn clean package
   post_build:
     commands:
-      - bash detect.sh --blackduck.url=$BLACKDUCK_URL --blackduck.api.token=$BLACKDUCK_TOKEN --blackduck.trust.cert=true --detect.project.name=$PROJECT_NAME --detect.project.version.name=$CODEBUILD_BUILD_ID --detect.accuracy.required=NONE
+      - bash detect8.sh --blackduck.url=$BLACKDUCK_URL --blackduck.api.token=$BLACKDUCK_TOKEN --blackduck.trust.cert=true --detect.project.name=$PROJECT_NAME --detect.project.version.name=$CODEBUILD_BUILD_ID --detect.accuracy.required=NONE
   
 artifacts:
   discard-paths: yes
