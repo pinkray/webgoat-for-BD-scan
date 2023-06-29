@@ -3,6 +3,7 @@ version: 0.2
 env:
   variables:
     PROJECT_NAME: "CodeBuild-Synopsys-Detect"
+    VERSION_NAME: "1.1.1"
   parameter-store:
     BLACKDUCK_URL: "detect-BD-URL"
     BLACKDUCK_TOKEN: "detect-BD-Token"
@@ -17,7 +18,7 @@ phases:
       - mvn clean package
   post_build:
     commands:
-      - bash detect8.sh --blackduck.url=$BLACKDUCK_URL --blackduck.api.token=$BLACKDUCK_TOKEN --blackduck.trust.cert=true --detect.project.name=$PROJECT_NAME --detect.project.version.name=$CODEBUILD_BUILD_ID --detect.accuracy.required=NONE
+      - bash detect8.sh --blackduck.url=$BLACKDUCK_URL --blackduck.api.token=$BLACKDUCK_TOKEN --blackduck.trust.cert=true --detect.project.name=$PROJECT_NAME --detect.project.version.name=$VERSION_NAME --detect.accuracy.required=NONE
       - curl -X POST https://testing.codedx.synopsys.com/codedx/api/analysis-prep/YYTW/analyze -H accept"':'" */* -d "''"
       
   
