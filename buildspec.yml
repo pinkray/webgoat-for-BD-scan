@@ -2,7 +2,7 @@ version: 0.2
  
 env:
   variables:
-    PROJECT_NAME: "CodeBuild-Synopsys-Detect-1.0"
+    PROJECT_NAME: "CodeBuild-BlackDuck-Detect"
     VERSION_NAME: "1.1.1"
   parameter-store:
     BLACKDUCK_URL: "detect-BD-URL"
